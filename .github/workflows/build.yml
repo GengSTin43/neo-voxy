@@ -1,5 +1,4 @@
 - name: Build with Gradle
-        # 使用 -I 参数指向我们刚创建的 init.gradle
         run: ./gradlew build -I init.gradle --info --stacktrace
         env:
           FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
