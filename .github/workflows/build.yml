@@ -1,28 +1,5 @@
-name: Build Voxy NeoForge
-on:
-  workflow_dispatch:
-
-# 解决 Node.js 24 兼容性告警
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Java 21
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '21'
-          cache: 'gradle'
-
-      - name: Grant Execute Permission
-        run: chmod +x gradlew
-
-      - name: Build with Gradle
-        # 添加 --info 这样如果失败了，能看到极细致的原因
-        run: ./gradlew build --info --stacktrace
+- name: Build with Gradle
+        # 使用 -I 参数指向我们刚创建的 init.gradle
+        run: ./gradlew build -I init.gradle --info --stacktrace
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
