@@ -1,0 +1,14 @@
+allprojects {
+    buildscript {
+        repositories {
+            maven { url "https://maven.minecraftforge.net/" }
+            maven { url "https://maven.neoforged.net/" }
+            mavenCentral()
+        }
+    }
+    repositories {
+        maven { url "https://maven.minecraftforge.net/" }
+        maven { url "https://maven.neoforged.net/" }
+        mavenCentral()
+    }
+}
