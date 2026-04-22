@@ -1,0 +1,32 @@
+name: Build Voxy NeoForge
+on:
+  workflow_dispatch: # 允许你手动点击按钮开始编译
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21' # 使用 Java 21 编译最为稳妥
+          cache: 'gradle'
+
+      - name: Grant Execute Permission for Gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew build --stacktrace
+        env:
+          # 如果之前 build.gradle 没改好，可以在这里注入一些参数
+          GRADLE_OPTS: -Dorg.gradle.daemon=false 
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Voxy-NeoForge-1.21.1
+          path: build/libs/*.jar # 编译成功后会将所有 jar 包打包供你下载
